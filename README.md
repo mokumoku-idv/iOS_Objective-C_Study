@@ -6,15 +6,22 @@ ios開発勉強
 
 <a href="https://developer.apple.com/library/ios/referencelibrary/GettingStarted/RoadMapiOS/FirstTutorial.html#//apple_ref/doc/uid/TP40011343-CH3-SW1">Start Developing iOS Apps Today</a>
 
-# What are XCode, Objective-C and Cocoa
+# Objective-C or Swift
+Swift is introduced by Apple in June 2014, intending to replace Objective-C for iOS and OS X development. But at present, I think it's better to learn Ojective-C while learning Swift, because many libraries are still written by Objective-C. 
+
+In the future, Swift may become more and more powerful that you can develop great apps without understanding Objective-C.
+
+<a href="http://smashingboxes.com/ideas/apples-swift-should-beginners-still-learn-objective-c">APPLE’S SWIFT: SHOULD BEGINNERS STILL LEARN OBJECTIVE-C?</a>
+
+# Basic understanding of Objective-C
+At first glance, Objective-C seems strange and you may think it's a <a href="http://en.wikipedia.org/wiki/Martian_language">Martian language</a>. But actually it is based on C just with some different syntax.
+
+### What are XCode, Objective-C and Cocoa
 Xcode is an Integrated Development Environments like Visual Studio or Eclipse. You can download it from AppStore.
 
 Objective-C is a  programming language like C or Java.
 
 Cocoa is a framework providing a set of libraries, like MFC、.NET、Swing. It is helpful to develop apps.
-
-# Basic understanding of Objective-C
-At first glance, Objective-C seems strange and you may think it's a <a href="http://en.wikipedia.org/wiki/Martian_language">Martian language</a>. But actually it is based on C just with some different syntax.
 
 ### "-" and "+"
 They are the beginning of a method (function). For example, a method of Java is like:
