@@ -157,3 +157,9 @@ Generally, nil = null
 ### @"string"
 It is shorthand to convert a c string to NSString.
 
+
+# Refs
+<a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIKit_Framework/index.html">UIKit Framework Reference</a>
+
+<a href="https://developer.apple.com/library/ios/recipes/xcode_help-IB_adaptive_sizes/chapters/AboutAdaptiveSizeDesign.html">Size Classes Design Help</a>
+
