@@ -164,5 +164,3 @@ It is shorthand to convert a c string to NSString.
 <a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIKit_Framework/index.html">UIKit Framework Reference</a>
 
 <a href="https://developer.apple.com/library/ios/recipes/xcode_help-IB_adaptive_sizes/chapters/AboutAdaptiveSizeDesign.html">Size Classes Design Help</a>
-
-<img src="https://github.com/mokumoku-idv/iOS_Objective-C_Study/blob/master/head_cat.png">
