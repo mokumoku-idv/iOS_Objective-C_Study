@@ -158,7 +158,14 @@ Generally, nil = null
 It is shorthand to convert a c string to NSString.
 
 
+# Tips
+##### Customize Xcode Key Bindings
+https://gist.github.com/cbess/4444374
+
+
 # Refs
+<a href="https://developer.apple.com/library/ios/documentation/Miscellaneous/Conceptual/iPhoneOSTechOverview/Introduction/Introduction.html">iOS Technology Overview</a>
+
 <a href="https://developer.apple.com/library/ios/documentation/Cocoa/Reference/Foundation/ObjC_classic/index.html">The Foundation Framework</a>
 
 <a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIKit_Framework/index.html">UIKit Framework Reference</a>
