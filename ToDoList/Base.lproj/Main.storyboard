@@ -19,10 +19,9 @@
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tqr-Xo-3JD" id="iyH-kW-psg">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Mow the lawn" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xMw-Wd-NRs">
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xMw-Wd-NRs">
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
@@ -36,6 +35,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="To-Do List" id="YvW-VC-N2H">
+                        <barButtonItem key="leftBarButtonItem" systemItem="edit" id="DSm-4D-XOi">
+                            <connections>
+                                <action selector="startEdit:" destination="RPF-9k-Yoo" id="66h-XH-jHT"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="4tO-44-MIM">
                             <connections>
                                 <segue destination="bda-Xf-Smw" kind="presentation" id="vdE-Tm-Ln7"/>
@@ -70,8 +74,14 @@
                         <constraints>
                             <constraint firstItem="rka-WH-jAx" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="7Jv-jv-vz9"/>
                             <constraint firstItem="rka-WH-jAx" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="jCg-Ec-7Xi"/>
+                            <constraint firstItem="rka-WH-jAx" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="10" id="jQx-WN-iqx"/>
                             <constraint firstItem="rka-WH-jAx" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="vv4-ut-l7s"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="jQx-WN-iqx"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" title="Add To-Do Item" id="aMV-hU-RRy">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="eF2-OB-KCH">
