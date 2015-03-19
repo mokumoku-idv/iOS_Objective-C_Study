@@ -35,7 +35,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="To-Do List" id="YvW-VC-N2H">
-                        <barButtonItem key="leftBarButtonItem" systemItem="edit" id="DSm-4D-XOi">
+                        <barButtonItem key="leftBarButtonItem" title="Edit" id="DSm-4D-XOi">
                             <connections>
                                 <action selector="startEdit:" destination="RPF-9k-Yoo" id="66h-XH-jHT"/>
                             </connections>

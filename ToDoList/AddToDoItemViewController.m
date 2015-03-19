@@ -41,6 +41,7 @@
         self.toDoItem = [[ToDoItem alloc] init];
         self.toDoItem.itemName = self.textField.text;
         self.toDoItem.completed = NO;
+        //self.toDoItem.creationDate = [NSDate date];
     }
 }
 

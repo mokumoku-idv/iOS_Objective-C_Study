@@ -24,6 +24,23 @@
     self.toDoItems = [[NSMutableArray alloc] init];
     [self loadInitialData];
     
+    NSDate *now = [NSDate date];
+    NSLog(@"%@", now);
+    NSDateComponents *components = [[NSDateComponents alloc] init];
+    [components setDay:6];
+    [components setMonth:5];
+    [components setYear:2004];
+    NSLog(@"%@", components.date);
+    NSLog(@"%d", components.year);
+    
+    NSCalendar *usersCalendar = [[NSLocale currentLocale] objectForKey:NSLocaleCalendar];
+    
+    //NSArray *timeZoneNames = [NSTimeZone knownTimeZoneNames];
+    //NSLog(@"%@", timeZoneNames);
+    //NSTimeZone *zone = [NSTimeZone systemTimeZone];
+    //NSLog(@"%@", zone);
+
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -118,15 +135,15 @@
 
 // Override to support rearranging the table view.
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-    NSLog(@"fromIndexPath %ld", fromIndexPath.row);
-    NSLog(@"toIndexPath %ld", toIndexPath.row);
+//    NSLog(@"fromIndexPath %ld", fromIndexPath.row);
+//    NSLog(@"toIndexPath %ld", toIndexPath.row);
     //[self.toDoItems exchangeObjectAtIndex:fromIndexPath.row withObjectAtIndex:toIndexPath.row];
     ToDoItem *moveItem = self.toDoItems[fromIndexPath.row];
     [self.toDoItems removeObjectAtIndex:fromIndexPath.row];
     [self.toDoItems insertObject:moveItem atIndex:toIndexPath.row];
-    for (ToDoItem *s in self.toDoItems) {
-        NSLog(@"%@", s.itemName);
-    }
+//    for (ToDoItem *s in self.toDoItems) {
+//        NSLog(@"%@", s.itemName);
+//    }
     //[self.tableView reloadData];
     //[self.tableView moveRowAtIndexPath:fromIndexPath toIndexPath:toIndexPath];
 }
@@ -160,6 +177,15 @@
 }
 
 - (IBAction)startEdit:(id)sender {
-    [self.tableView setEditing:YES animated:YES];
+    BOOL blEditing = self.tableView.editing;
+    if (!blEditing) {
+        self.navigationItem.leftBarButtonItem.style = UIBarButtonItemStyleDone;
+        self.navigationItem.leftBarButtonItem.title = @"Done";
+    } else {
+        self.navigationItem.leftBarButtonItem.style = UIBarButtonItemStylePlain;
+        self.navigationItem.leftBarButtonItem.title = @"Edit";
+    }
+    self.navigationItem.rightBarButtonItem.enabled = blEditing;
+    [self.tableView setEditing:!blEditing animated:YES];
 }
 @end
