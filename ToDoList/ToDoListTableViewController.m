@@ -24,22 +24,7 @@
     self.toDoItems = [[NSMutableArray alloc] init];
     [self loadInitialData];
     
-    NSDate *now = [NSDate date];
-    NSLog(@"%@", now);
-    NSDateComponents *components = [[NSDateComponents alloc] init];
-    [components setDay:6];
-    [components setMonth:5];
-    [components setYear:2004];
-    NSLog(@"%@", components.date);
-    NSLog(@"%d", components.year);
-    
-    NSCalendar *usersCalendar = [[NSLocale currentLocale] objectForKey:NSLocaleCalendar];
-    
-    //NSArray *timeZoneNames = [NSTimeZone knownTimeZoneNames];
-    //NSLog(@"%@", timeZoneNames);
-    //NSTimeZone *zone = [NSTimeZone systemTimeZone];
-    //NSLog(@"%@", zone);
-
+    [NSTimer scheduledTimerWithTimeInterval:60 target:self selector:@selector(_reloadTableView) userInfo:nil repeats:YES];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -99,6 +84,14 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ListPrototypeCell" forIndexPath:indexPath];
     ToDoItem *toDoItem = [self.toDoItems objectAtIndex:indexPath.row];
     cell.textLabel.text = toDoItem.itemName;
+    
+//    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+//    NSTimeZone *timeZone = [NSTimeZone localTimeZone];
+//    [formatter setTimeZone:timeZone];
+//    [formatter setDateFormat: @"yyyy-MM-dd HH:mm"];
+//    cell.detailTextLabel.text = [formatter stringFromDate:toDoItem.creationDate];
+    cell.detailTextLabel.text = [self _relativeDateStringForDate:toDoItem.creationDate];
+    
     if (toDoItem.completed) {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
     } else {
@@ -135,17 +128,13 @@
 
 // Override to support rearranging the table view.
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-//    NSLog(@"fromIndexPath %ld", fromIndexPath.row);
-//    NSLog(@"toIndexPath %ld", toIndexPath.row);
     //[self.toDoItems exchangeObjectAtIndex:fromIndexPath.row withObjectAtIndex:toIndexPath.row];
     ToDoItem *moveItem = self.toDoItems[fromIndexPath.row];
     [self.toDoItems removeObjectAtIndex:fromIndexPath.row];
     [self.toDoItems insertObject:moveItem atIndex:toIndexPath.row];
-//    for (ToDoItem *s in self.toDoItems) {
-//        NSLog(@"%@", s.itemName);
+//    for (ToDoItem *item in self.toDoItems) {
+//        [item print];
 //    }
-    //[self.tableView reloadData];
-    //[self.tableView moveRowAtIndexPath:fromIndexPath toIndexPath:toIndexPath];
 }
 
 
@@ -188,4 +177,35 @@
     self.navigationItem.rightBarButtonItem.enabled = blEditing;
     [self.tableView setEditing:!blEditing animated:YES];
 }
+
+- (NSString *)_relativeDateStringForDate:(NSDate *)date {
+    NSCalendarUnit units = NSCalendarUnitSecond | NSCalendarUnitMinute | NSCalendarUnitHour | NSCalendarUnitDay | NSCalendarUnitWeekOfYear | NSCalendarUnitMonth | NSCalendarUnitYear;
+    NSDateComponents *components = [[NSCalendar currentCalendar] components:units fromDate:date toDate:[NSDate date] options:0];
+    
+    NSString *strResult = nil;
+    if (components.year > 0) {
+        strResult = [NSString stringWithFormat:@"%ld years ago", (long)components.year];
+    } else if (components.month > 0) {
+        strResult = [NSString stringWithFormat:@"%ld months ago", (long)components.month];
+    } else if (components.weekOfYear > 0) {
+        strResult = [NSString stringWithFormat:@"%ld weeks ago", (long)components.weekOfYear];
+    } else if (components.day > 0) {
+        strResult = [NSString stringWithFormat:@"%ld days ago", (long)components.day];
+    } else if (components.hour > 0) {
+        strResult = [NSString stringWithFormat:@"%ld hours ago", (long)components.hour];
+    } else if (components.minute > 0) {
+        strResult = [NSString stringWithFormat:@"%ld minutes ago", (long)components.minute];
+    } else if (components.second > 0) {
+        strResult = [NSString stringWithFormat:@"%ld seconds ago", (long)components.second];
+    } else {
+        strResult = @"just now";
+    }
+    
+    return strResult;
+}
+
+- (void)_reloadTableView {
+    [self.tableView reloadData];
+}
+
 @end
