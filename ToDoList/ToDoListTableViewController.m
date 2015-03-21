@@ -22,7 +22,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.toDoItems = [[NSMutableArray alloc] init];
-    [self loadInitialData];
+    //[self loadInitialData];
+    [self loadToDoItems];
     
     [NSTimer scheduledTimerWithTimeInterval:60 target:self selector:@selector(_reloadTableView) userInfo:nil repeats:YES];
     
@@ -49,35 +50,6 @@
     // Return the number of rows in the section.
     return [self.toDoItems count];
 }
-
-- (IBAction) unwindToList:(UIStoryboardSegue *)seque {
-    AddToDoItemViewController *source = [seque sourceViewController];
-    ToDoItem *item = source.toDoItem;
-    if (item != nil) {
-        [self.toDoItems addObject:item];
-        [self.tableView reloadData];
-    }
-}
-
-- (void) loadInitialData {
-    ToDoItem *item1 = [[ToDoItem alloc] init];
-    item1.itemName = @"Buy milk";
-    [self.toDoItems addObject:item1];
-    ToDoItem *item2 = [[ToDoItem alloc] init];
-    item2.itemName = @"Buy eggs";
-    [self.toDoItems addObject:item2];
-    ToDoItem *item3 = [[ToDoItem alloc] init];
-    item3.itemName = @"Read a book";
-    [self.toDoItems addObject:item3];
-    ToDoItem *item4 = [[ToDoItem alloc] init];
-    item4.itemName = @"Eat cake";
-    [self.toDoItems addObject:item4];
-    ToDoItem *item5 = [[ToDoItem alloc] init];
-    item5.itemName = @"Check email";
-    [self.toDoItems addObject:item5];
-}
-
-
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     // Configure the cell...
@@ -115,7 +87,7 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source
-        NSLog(@"Deleted row %ld", indexPath.row);
+        //NSLog(@"Deleted row %ld", indexPath.row);
         [self.toDoItems removeObjectAtIndex:indexPath.row];
         //[self.tableView reloadData];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
@@ -165,6 +137,17 @@
     [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
 }
 
+
+
+- (IBAction) unwindToList:(UIStoryboardSegue *)seque {
+    AddToDoItemViewController *source = [seque sourceViewController];
+    ToDoItem *item = source.toDoItem;
+    if (item != nil) {
+        [self.toDoItems addObject:item];
+        [self.tableView reloadData];
+    }
+}
+
 - (IBAction)startEdit:(id)sender {
     BOOL blEditing = self.tableView.editing;
     if (!blEditing) {
@@ -176,6 +159,25 @@
     }
     self.navigationItem.rightBarButtonItem.enabled = blEditing;
     [self.tableView setEditing:!blEditing animated:YES];
+}
+
+
+- (void) loadInitialData {
+    ToDoItem *item1 = [[ToDoItem alloc] init];
+    item1.itemName = @"Buy milk";
+    [self.toDoItems addObject:item1];
+    ToDoItem *item2 = [[ToDoItem alloc] init];
+    item2.itemName = @"Buy eggs";
+    [self.toDoItems addObject:item2];
+    ToDoItem *item3 = [[ToDoItem alloc] init];
+    item3.itemName = @"Read a book";
+    [self.toDoItems addObject:item3];
+    ToDoItem *item4 = [[ToDoItem alloc] init];
+    item4.itemName = @"Eat cake";
+    [self.toDoItems addObject:item4];
+    ToDoItem *item5 = [[ToDoItem alloc] init];
+    item5.itemName = @"Check email";
+    [self.toDoItems addObject:item5];
 }
 
 - (NSString *)_relativeDateStringForDate:(NSDate *)date {
@@ -206,6 +208,21 @@
 
 - (void)_reloadTableView {
     [self.tableView reloadData];
+}
+
+- (void)saveToDoItems {
+    //NSLog(@"saveToDoItems");
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:self.toDoItems];
+    [userDefaults setObject:data forKey:@"toDoItems"];
+    [userDefaults synchronize];
+}
+
+- (void)loadToDoItems {
+    //NSLog(@"loadToDoItems");
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSData *data = [userDefaults objectForKey:@"toDoItems"];
+    self.toDoItems = (NSMutableArray *)[NSKeyedUnarchiver unarchiveObjectWithData:data];
 }
 
 @end
