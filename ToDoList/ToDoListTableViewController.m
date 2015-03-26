@@ -222,7 +222,9 @@
     //NSLog(@"loadToDoItems");
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSData *data = [userDefaults objectForKey:@"toDoItems"];
-    self.toDoItems = (NSMutableArray *)[NSKeyedUnarchiver unarchiveObjectWithData:data];
+    if (data != nil) {
+        self.toDoItems = (NSMutableArray *)[NSKeyedUnarchiver unarchiveObjectWithData:data];
+    }
 }
 
 @end
